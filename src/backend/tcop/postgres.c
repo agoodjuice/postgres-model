@@ -78,7 +78,7 @@
 #include "utils/timeout.h"
 #include "utils/timestamp.h"
 #include "mb/pg_wchar.h"
-
+#include "model/libtorch_wrapper.h"
 
 /* ----------------
  *		global variables
@@ -4032,7 +4032,11 @@ PostgresMain(int argc, char *argv[],
 	/*
 	 * Non-error queries loop here.
 	 */
-
+	if(load_torch_model("/home/postgres/resnet18.pt") == 0){
+		elog(INFO, "load model successed ");
+	}else {
+		elog(INFO, "load model failed");
+	}
 	for (;;)
 	{
 		/*
